@@ -80,4 +80,16 @@ public class ProductServiceTests {
             ProductDTO result = serviceSpy.insert(productDTO);
         });
     }
+
+    @Test
+    public void updateShouldReturnProductDTOWhenIdExistAndValidData(){
+
+        ProductService serviceSpy = Mockito.spy(service);
+        Mockito.doNothing().when(serviceSpy).validateData(productDTO);
+
+        ProductDTO result = serviceSpy.update(existingId, productDTO);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getId(), existingId);
+    }
 }
